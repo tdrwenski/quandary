@@ -5,8 +5,45 @@ It is advised to look at the user guide in `doc/`, describing the underlying mat
 
 Feel free to reach out to Stefanie Guenther [guenther5@llnl.gov] for any question you may have. 
 
-## Dependencies
-This project relies on Petsc [https://petsc.org/release/] to handle (parallel) linear algebra. Optionally Slepsc [https://slepc.upv.es] can be used to solve some eigenvalue problems if desired (e.g. for the Hessian...)
+## Building
+Quandary uses CMake and BLT to handle builds. Since BLT is included as a
+submodule, first make sure you run:
+```
+git submodule init && git submodule update
+```
+
+This project relies on Petsc [https://petsc.org/release/] to handle (parallel) linear algebra. Optionally Slepsc [https://slepc.upv.es] can be used to solve some eigenvalue problems if desired (e.g. for the Hessian...).
+
+### Spack
+Petc, Slepc, and other dependencies such as Python packages can be managed and installed using Spack. Additionally, Spack can build Quandary itself from your local source code.
+
+1. To install Spack, clone the repo and add to your shell following the steps [here](https://spack.readthedocs.io/en/latest/getting_started.html#installation).
+
+2. To setup your compilers in your local Spack configuration:
+   ```
+   spack compiler find
+   ```
+
+3. To activate Quandary's spack environment, run:
+    ```
+    spack env activate .spack_env/
+    ```
+
+4. Trust Spack's binary mirror so we can speed up the installation process:
+    ```
+    spack buildcache keys --install --trust
+    ```
+5. Finally, to install the necessary dependencies and build Quandary run:
+    ```
+    spack install
+    ```
+    Note: This step could take a while the first time.
+
+Note that `spack install` will build Quandary using CMake from your local source code. The second time you run this is should be much faster, only looking for changes in the environment or local code. By default the specification in the Spack environment `.spack_env/spack.yaml` includes Slepc and Petsc in debug mode (`quandary+slepc+debug`).
+
+## Manually installing dependencies
+If you don't want to use Spack to install dependencies as explained above, you can follow these steps to install Petsc and optionally Slepc.
+
 * **Required:** Install Petsc:
 
     Check out [https://petsc.org/release/] for the latest installation guide. On MacOS, you can also `brew install petsc`. As a quick start, you can also try the below:
@@ -25,23 +62,18 @@ This project relies on Petsc [https://petsc.org/release/] to handle (parallel) l
 * **Optional:** Install Slepsc
     * Read the docs here: [https://slepc.upv.es/documentation/slepc.pdf]
 
-###  Petsc on LLNL's LC
-Petc is already installed on LLNL LC machines, see here [https://hpc.llnl.gov/software/mathematical-software/petsc]. It is located at '/usr/tce/packages/petsc/<version>'. To use it, export the 'PETSC_DIR' variable to point to the Petsc folder, and add the 'lib' subfolder to the 'LD_LIBRARY_PATH` variable: 
-* `export PETSC_DIR=/usr/tce/packages/petsc/<version>` (check the folder name for version number)
-* `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib`
 
-The 'PETSC_ARCH' variable is not needed in this case. 
-
-Depending on your setup, you might need to load some additional modules, such as openmpi, e.g. as so:
-* `module load openmpi`
-
-## Installation
-Adapt the beginning of the 'Makefile' to set the path to your Petsc (and possibly Slepsc, python path, and fitpackpp) installation, if not exported. Then,
-* `make cleanup` to clean the build directory. (Note the *up* in *cleanup*.)
-* `make quandary` to build the code (or 'make -j quandary' for faster build using multiple threads)
-
-It is advised to add Quandary to your `PATH`, e.g.
-* `export PATH=$PATH:/path/to/quandary/`
+## Building without Spack
+If you don't want to use Spack to build Quandary, as explained above, you can build directly with CMake, using:
+```
+mkdir build && cd build
+cmake ..
+make
+```
+To use SLEPc, you can pass a flag to `cmake`:
+```
+cmake -DWITH_SLEPC=ON ..
+```
 
 **Optional:** To run Quandary from within a Python environment, you should have a working python interpreter with numpy and matplotlib installed. Then, append Quandary's location to your `PYTHONPATH`, e.g. with  
 * `export PYTHONPATH=$PYTHONPATH:/path/to/quandary/`

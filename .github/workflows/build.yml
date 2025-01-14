@@ -1,0 +1,24 @@
+on: pull_request
+name: Build
+jobs:
+  build_mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: threeal/cmake-action@v1.3.0
+        with:
+          build-dir: build
+          run-build: true
+      - uses: threeal/ctest-action@v1.1.0
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: threeal/cmake-action@v1.3.0
+        with:
+          build-dir: build
+          run-build: true

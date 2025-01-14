@@ -1,0 +1,24 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  repos: [../.spack_packages/]
+  specs:
+  - quandary@develop+slepc+debug
+  - python
+  - py-numpy
+  - py-matplotlib
+  # tests
+  - py-pandas
+  - py-pydantic
+  - py-pytest
+  view: true
+  concretizer:
+    unify: true
+  develop:
+    quandary:
+      path: ../
+      spec: quandary@=develop
+  mirrors:
+    binary_mirror: https://binaries.spack.io/develop
