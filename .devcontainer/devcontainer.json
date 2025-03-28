@@ -4,7 +4,7 @@
       "cpus": 4
     },
     "waitFor": "onCreateCommand",
-    "onCreateCommand": "python3 -m pip install -e .",
+    "onCreateCommand": "python3 -m pip install -e . && python3 -m ipykernel install --user --name quandary-env --display-name 'Python (Quandary)'",
     "customizations": {
       "codespaces": {
         "openFiles": [
@@ -15,7 +15,15 @@
         "extensions": [
           "ms-toolsai.jupyter",
           "ms-python.python"
-        ]
+        ],
+        "settings": {
+          "jupyter.defaultKernelName": "python3",
+          "jupyter.kernels.filter": [
+            {
+              "type": "pythonEnvironment"
+            }
+          ]
+        }
       }
     }
   }
