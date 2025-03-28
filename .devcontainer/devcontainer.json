@@ -1,0 +1,29 @@
+{
+    "image": "ghcr.io/tdrwenski/quandary-codespace:latest",
+    "hostRequirements": {
+      "cpus": 4
+    },
+    "waitFor": "onCreateCommand",
+    "onCreateCommand": "python3 -m pip install -e . && python3 -m ipykernel install --user --name quandary-env --display-name 'Python (Quandary)'",
+    "customizations": {
+      "codespaces": {
+        "openFiles": [
+          "examples/pythoninterface/QuandaryWithPython_HowTo.ipynb"
+        ]
+      },
+      "vscode": {
+        "extensions": [
+          "ms-toolsai.jupyter",
+          "ms-python.python"
+        ],
+        "settings": {
+          "jupyter.defaultKernelName": "python3",
+          "jupyter.kernels.filter": [
+            {
+              "type": "pythonEnvironment"
+            }
+          ]
+        }
+      }
+    }
+  }
