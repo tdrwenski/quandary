@@ -32,9 +32,74 @@ module load openmpi
 
 ## Build and Installation
 
-### Building with CMake (Recommended)
+### Installing with Spack (Recommended)
 
-Quandary now uses CMake with the BLT build system for easier dependency management.
+Quandary can be installed using the [Spack](https://spack.io/) package manager, which automatically handles all dependencies:
+
+1. If you don't have Spack installed, follow the [Spack installation instructions](https://spack.io/downloads/):
+   ```
+   git clone -c feature.manyFiles=true https://github.com/spack/spack.git
+   . spack/share/spack/setup-env.sh
+   ```
+
+2. Add the Quandary repository to Spack:
+   ```
+   mkdir -p ~/spack-repos/quandary/packages/quandary
+   cp /path/to/quandary/package.py ~/spack-repos/quandary/packages/quandary/
+   echo "repo:" > ~/spack-repos/quandary/repo.yaml
+   echo "  namespace: quandary_repo" >> ~/spack-repos/quandary/repo.yaml
+   spack repo add ~/spack-repos/quandary
+   ```
+
+3. Install Quandary with Spack:
+   ```
+   spack install quandary
+   ```
+
+4. To install with SLEPc support:
+   ```
+   spack install quandary+slepc
+   ```
+
+5. Load Quandary in your environment:
+   ```
+   spack load quandary
+   ```
+
+#### Development Setup with Spack
+
+To set up a development environment for Quandary using Spack:
+
+1. Create a `spack.yaml` file in your Quandary directory:
+   ```yaml
+   spack:
+     specs:
+     - quandary@develop
+     
+     view: true
+     
+     concretizer:
+       unify: true
+       
+     develop:
+       quandary:
+         spec: quandary@=develop
+         path: .
+   ```
+
+2. Activate the environment:
+   ```
+   cd /path/to/quandary
+   spack env activate .
+   spack concretize -f
+   spack install
+   ```
+
+This approach allows you to work on the Quandary code while Spack manages the dependencies.
+
+### Building with CMake
+
+Quandary uses CMake with the BLT build system for dependency management.
 
 1. Clone the repository and update the submodules:
    ```

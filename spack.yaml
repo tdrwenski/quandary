@@ -1,0 +1,13 @@
+spack:
+  specs:
+  - quandary@develop
+  
+  view: true
+  
+  concretizer:
+    unify: true
+    
+  develop:
+    quandary:
+      spec: quandary@=develop
+      path: .
