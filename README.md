@@ -7,52 +7,101 @@ Feel free to reach out to Stefanie Guenther [guenther5@llnl.gov] for any questio
 
 ## Dependencies
 This project relies on Petsc [https://petsc.org/release/] to handle (parallel) linear algebra. Optionally Slepsc [https://slepc.upv.es] can be used to solve some eigenvalue problems if desired (e.g. for the Hessian...)
-* **Required:** Install Petsc:
 
-    Check out [https://petsc.org/release/] for the latest installation guide. On MacOS, you can also `brew install petsc`. As a quick start, you can also try the below:
-    * Download tarball for Petsc here [https://ftp.mcs.anl.gov/pub/petsc/release-snapshots/].   
-    * `tar -xf petsc-<version>.tar.gz`
-    * `cd petsc-<version>`
-    * Configure Petsc with `./configure`. Please check [https://petsc.org/release/install/install_tutorial] for optional arguments. For example, 
-        `./configure --prefix=/YOUR/INSTALL/DIR --with-debugging=0 --with-fc=0 --with-cxx=mpicxx --with-cc=mpicc COPTFLAGS='-O3' CXXOPTFLAGS='-O3'`
-    * The output of `./configure` reports on how to set the `PETSC_DIR` and `PETSC_ARCH` variables
-        * `export PETSC_DIR=/YOUR/INSTALL/DIR`
-        * `export PETSC_ARCH=/YOUR/ARCH/PREFIX`
-    * Compile petsc with `make all check'
-    * Append Petsc directory to the `LD_LIBRARY_PATH`:
-        * `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/$PETSC_ARCH/lib`
+### PETSc
+* Download and install PETSc from [https://petsc.org/release/]
+* On MacOS, you can also use: `brew install petsc`
+* Make sure PETSc's pkg-config files are discoverable:
+  ```
+  export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/path/to/petsc/lib/pkgconfig
+  ```
 
-* **Optional:** Install Slepsc
-    * Read the docs here: [https://slepc.upv.es/documentation/slepc.pdf]
+### SLEPc (Optional)
+* If you want to use SLEPc for eigenvalue problems, install from [https://slepc.upv.es]
+* Make sure SLEPc's pkg-config files are discoverable:
+  ```
+  export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/path/to/slepc/lib/pkgconfig
+  ```
 
-###  Petsc on LLNL's LC
-Petc is already installed on LLNL LC machines, see here [https://hpc.llnl.gov/software/mathematical-software/petsc]. It is located at '/usr/tce/packages/petsc/<version>'. To use it, export the 'PETSC_DIR' variable to point to the Petsc folder, and add the 'lib' subfolder to the 'LD_LIBRARY_PATH` variable: 
-* `export PETSC_DIR=/usr/tce/packages/petsc/<version>` (check the folder name for version number)
-* `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib`
+### PETSc/SLEPc on LLNL's LC
+PETSc is already installed on LLNL LC machines. Load the appropriate modules:
+```
+module load petsc
+module load openmpi
+```
 
-The 'PETSC_ARCH' variable is not needed in this case. 
+## Build and Installation
 
-Depending on your setup, you might need to load some additional modules, such as openmpi, e.g. as so:
-* `module load openmpi`
+### Building with CMake (Recommended)
 
-## Installation
-Adapt the beginning of the 'Makefile' to set the path to your Petsc (and possibly Slepsc, python path, and fitpackpp) installation, if not exported. Then,
-* `make cleanup` to clean the build directory. (Note the *up* in *cleanup*.)
-* `make quandary` to build the code (or 'make -j quandary' for faster build using multiple threads)
+Quandary now uses CMake with the BLT build system for easier dependency management.
 
-It is advised to add Quandary to your `PATH`, e.g.
-* `export PATH=$PATH:/path/to/quandary/`
+1. Clone the repository and update the submodules:
+   ```
+   git clone <repository-url>
+   cd quandary
+   git submodule update --init
+   ```
 
-**Optional:** To run Quandary from within a Python environment, you should have a working python interpreter with numpy and matplotlib installed. Then, append Quandary's location to your `PYTHONPATH`, e.g. with  
-* `export PYTHONPATH=$PYTHONPATH:/path/to/quandary/`
-and have a look into the examples.
- 
+2. Create a build directory and configure:
+   ```
+   mkdir build && cd build
+   cmake ..
+   ```
+
+3. Build the project:
+   ```
+   cmake --build . -j
+   ```
+
+4. Optionally install:
+   ```
+   cmake --install .
+   ```
+
+#### CMake Configuration Options
+
+* `-DWITH_SLEPC=ON`: Enable SLEPc for eigenvalue problems
+* `-DSANITY_CHECK=ON`: Enable sanity checks
+* `-DCMAKE_INSTALL_PREFIX=/path/to/install`: Set installation directory
+* `-DPETSC_DIR=/path/to/petsc`: Specify custom PETSc installation path (if not found via pkg-config)
+* `-DSLEPC_DIR=/path/to/slepc`: Specify custom SLEPc installation path (if not found via pkg-config)
+
+### Building with Make (Legacy)
+
+The original Makefile build system is still available:
+
+1. Adapt the beginning of the 'Makefile' to set the path to your Petsc (and possibly Slepsc) installation, if not exported:
+   ```
+   export PETSC_DIR=/path/to/petsc
+   export PETSC_ARCH=arch-linux-c-debug  # If required
+   ```
+
+2. Clean and build:
+   ```
+   make cleanup
+   make -j quandary
+   ```
+
+It is advised to add Quandary to your `PATH`:
+```
+export PATH=$PATH:/path/to/quandary/
+```
 
 ## Running
-The code builds into the executable `quandary`. It takes one argument being the name of the test-case's configuration file. The file `config_template.cfg`, lists all possible configuration options. The configuration file is filled with comments that should help users set up their test case and match the options to the description in the user guide. Also compare the examples folder.
-* `./quandary config_template.cfg`
-* `mpirun -np 4 ./quandary config_template.cfg --quiet`
+The code builds into the executable `quandary`. It takes one argument: the name of the test-case's configuration file. The file `config_template.cfg` lists all possible configuration options.
 
+Examples:
+```
+./quandary config_template.cfg
+mpirun -np 4 ./quandary config_template.cfg --quiet
+```
+
+**Python Interface:** To run Quandary from within a Python environment, make sure you have numpy and matplotlib installed, and add Quandary to your Python path:
+```
+export PYTHONPATH=$PYTHONPATH:/path/to/quandary/
+```
+See the `examples/pythoninterface/` directory for examples.
 
 ## Community and Contributing
 
