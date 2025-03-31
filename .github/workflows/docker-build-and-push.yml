@@ -85,6 +85,12 @@ jobs:
           # Create a Dockerfile that uses the latest Spack image as base
           cat > Dockerfile.codespace << EOF
           FROM ghcr.io/tdrwenski/spack-buildcache:${IMAGE_TAG}
+
+          # Create non-root user
+          RUN useradd -m -s /bin/bash devuser
+          USER devuser
+          WORKDIR /home/devuser
+
           EOF
 
           echo "Dockerfile created with base image: ghcr.io/tdrwenski/spack-buildcache:${IMAGE_TAG}"
