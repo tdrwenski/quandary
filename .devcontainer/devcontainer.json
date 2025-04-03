@@ -1,0 +1,21 @@
+{
+  "image": "ghcr.io/tdrwenski/quandary:latest",
+  "hostRequirements": {
+    "cpus": 4
+  },
+  "waitFor": "postCreateCommand",
+  "onCreateCommand": ". /home/runner/work/quandary/quandary/mpi_wrapper.sh",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "examples/pythoninterface/QuandaryWithPython_HowTo.ipynb"
+      ]
+    },
+    "vscode": {
+      "extensions": [
+        "ms-toolsai.jupyter",
+        "ms-python.python"
+      ]
+    }
+  }
+}
