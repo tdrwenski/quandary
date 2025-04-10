@@ -63,7 +63,7 @@ jobs:
         spack -e .spack_env mirror set binary_mirror --unsigned
         spack mirror add --type binary --unsigned --oci-username GITHUB_USER --oci-password-variable GITHUB_TOKEN local-buildcache oci://ghcr.io/tdrwenski/spack-buildcache
         spack compiler find
-        spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python make
+        spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python make pip
 
     - name: Build Quandary
       run: |
