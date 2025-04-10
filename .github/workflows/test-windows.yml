@@ -36,8 +36,8 @@ jobs:
         python -m pip install --upgrade pip six pywin32 setuptools coverage
         python -m pip install -e . --prefer-binary
 
-    - name: Install diffutils
-      run: choco install diffutils -y
+    - name: Install packages with choco
+      run: choco install diffutils make -y
 
     - name: Cache OneAPI Fortran
       id: cache-fortran
@@ -64,7 +64,7 @@ jobs:
         spack -e .spack_env mirror set binary_mirror --unsigned
         spack mirror add --type binary --unsigned --oci-username GITHUB_USER --oci-password-variable GITHUB_TOKEN local-buildcache oci://ghcr.io/tdrwenski/spack-buildcache
         spack compiler find
-        spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python
+        spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python make
 
     - name: Build Quandary
       run: |
