@@ -24,6 +24,7 @@ jobs:
     - name: Checkout Spack
       uses: actions/checkout@v4
       with:
+        ref: rsc-2025-03-0
         repository: spack/spack
         path: spack
 
