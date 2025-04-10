@@ -39,14 +39,22 @@ jobs:
     - name: Install diffutils
       run: choco install diffutils -y
 
+    - name: Cache OneAPI Fortran
+      id: cache-fortran
+      uses: actions/cache@v3
+      with:
+        path: C:\Program Files (x86)\Intel\oneAPI\compiler\
+        key: ${{ runner.os }}-fortran
+
     - name: Install OneApi fortran compiler
+      if: steps.cache-fortran.outputs.cache-hit != 'true'
       env:
         ONEAPI_FORTRAN_URL:
           https://registrationcenter-download.intel.com/akdlm/IRC_NAS/f6a44238-5cb6-4787-be83-2ef48bc70cba/w_fortran-compiler_p_2024.1.0.466_offline.exe
       run: |
-          curl -SL --output oneapi_installer.exe %ONEAPI_FORTRAN_URL%
-          start /w oneapi_installer.exe -s --remove-extracted-files yes -a --silent --eula accept
-          del oneapi_installer.exe
+        curl -SL --output oneapi_installer.exe %ONEAPI_FORTRAN_URL%
+        start /w oneapi_installer.exe -s --remove-extracted-files yes -a --silent --eula accept
+        del oneapi_installer.exe
       shell: cmd
 
     - name: Spack configuration
