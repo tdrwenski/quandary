@@ -53,16 +53,15 @@ jobs:
       run: |
         echo "SPACK_COLOR=always" >> "$GITHUB_ENV"
         echo "SPACK_DISABLE_LOCAL_CONFIG=1" >> "$GITHUB_ENV"
-        spack mirror add --unsigned github-actions-buildcache oci://ghcr.io/spack/github-actions-buildcache
+        spack -e .spack_env mirror set binary_mirror --unsigned
         spack mirror add --type binary --unsigned --oci-username GITHUB_USER --oci-password-variable GITHUB_TOKEN local-buildcache oci://ghcr.io/tdrwenski/spack-buildcache
         spack compiler find
-        cat C:\Users\runneradmin\.spack\windows\compilers.yaml
         spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python
 
     - name: Build Quandary
       run: |
         spack -e .spack_env concretize
-        spack -e .spack_env -v install
+        spack -e .spack_env -v install --use-buildcache package:never
 
     - name: Run regression tests
       run: |
