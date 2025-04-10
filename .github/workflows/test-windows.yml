@@ -67,7 +67,8 @@ jobs:
 
     - name: Build Quandary
       run: |
-        spack -e .spack_env concretize
+        spack -e .spack_env rm quandary
+        spack -e .spack_env add quandary@develop+test^flexiblas cflags="-Dstrdup=_strdup"
         spack -e .spack_env -v install --use-buildcache package:never
 
     - name: Run regression tests
