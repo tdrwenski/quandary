@@ -66,12 +66,17 @@ jobs:
         cat C:\Users\runneradmin\.spack\packages.yaml
         spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python make py-pip
         spack external find -p C:\ProgramData\chocolatey\lib\ diffutils make
+        spack bootstrap now
 
-    - name: Build Quandary
+    - name: Concretize Quandary
       run: |
         spack -e .spack_env rm quandary
         spack -e .spack_env add quandary@develop+test^openblas
         spack -e .spack_env concretize -f
+        spack -e .spack_env spec --long
+
+    - name: Build Quandary
+      run: |
         spack -e .spack_env -v install --use-buildcache package:never --show-log-on-error
 
     - name: Run regression tests
