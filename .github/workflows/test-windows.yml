@@ -24,7 +24,8 @@ jobs:
     - name: Checkout Spack
       uses: actions/checkout@v4
       with:
-        repository: spack/spack
+        repository: tdrwenski/spack
+        ref: msmpi-signature-fix
         path: spack
 
     - name: Setup python
