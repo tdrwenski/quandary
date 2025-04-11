@@ -63,13 +63,14 @@ jobs:
         spack -e .spack_env mirror set binary_mirror --unsigned
         spack mirror add --type binary --unsigned --oci-username GITHUB_USER --oci-password-variable GITHUB_TOKEN local-buildcache oci://ghcr.io/tdrwenski/spack-buildcache
         spack compiler find
+        cat C:\Users\runneradmin\.spack\packages.yaml
         spack external find -p C:\ProgramData\chocolatey\lib\ cmake ninja win-sdk win-wdk wgl msmpi diffutils python make py-pip
 
     - name: Build Quandary
       run: |
         spack -e .spack_env rm quandary
         spack -e .spack_env add quandary@develop+test^flexiblas cflags="-Dstrdup=_strdup"
-        spack -e .spack_env -v install --use-buildcache package:never
+        spack -e .spack_env -v install --use-buildcache package:never --show-log-on-error
 
     - name: Run regression tests
       run: |
