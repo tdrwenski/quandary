@@ -64,8 +64,8 @@ jobs:
         spack mirror add --type binary --unsigned --oci-username GITHUB_USER --oci-password-variable GITHUB_TOKEN local-buildcache oci://ghcr.io/tdrwenski/spack-buildcache
         spack compiler find
         cat C:\Users\runneradmin\.spack\packages.yaml
-        spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python make py-pip
-        spack external find -p C:\ProgramData\chocolatey\lib\ diffutils make
+        spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python gmake py-pip
+        spack external find -p C:\ProgramData\chocolatey\lib\ diffutils gmake
         spack bootstrap now
 
     - name: Concretize Quandary
