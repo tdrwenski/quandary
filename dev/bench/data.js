@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1745355216071,
+  "lastUpdate": 1745355898366,
   "repoUrl": "https://github.com/tdrwenski/quandary",
   "entries": {
     "Benchmark": [
@@ -102,6 +102,42 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.02731429249076428",
             "extra": "mean: 1.3828381703000105 sec\nrounds: 10"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Tara Drwenski",
+            "username": "tdrwenski",
+            "email": "drwenski1@llnl.gov"
+          },
+          "committer": {
+            "name": "Tara Drwenski",
+            "username": "tdrwenski",
+            "email": "drwenski1@llnl.gov"
+          },
+          "id": "aa20a9de1ed0ba23da30274ae8f629f2ef44e872",
+          "message": "Update workflow for testing",
+          "timestamp": "2025-04-22T21:02:14Z",
+          "url": "https://github.com/tdrwenski/quandary/commit/aa20a9de1ed0ba23da30274ae8f629f2ef44e872"
+        },
+        "date": 1745355898030,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "performance_tests/performance_test.py::test_eval[config_template_1]",
+            "value": 0.7739212579623119,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01010921174086983",
+            "extra": "mean: 1.292121116601629 sec\nrounds: 10"
+          },
+          {
+            "name": "performance_tests/performance_test.py::test_eval[config_template_4]",
+            "value": 2.2569954802150685,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00710061640109224",
+            "extra": "mean: 443.06690410594456 msec\nrounds: 10"
           }
         ]
       }
