@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1745355898366,
+  "lastUpdate": 1745356248274,
   "repoUrl": "https://github.com/tdrwenski/quandary",
   "entries": {
     "Benchmark": [
@@ -138,6 +138,40 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00710061640109224",
             "extra": "mean: 443.06690410594456 msec\nrounds: 10"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "tdrwenski",
+            "username": "tdrwenski"
+          },
+          "committer": {
+            "name": "tdrwenski",
+            "username": "tdrwenski"
+          },
+          "id": "aa20a9de1ed0ba23da30274ae8f629f2ef44e872",
+          "message": "Perf testing",
+          "timestamp": "2025-04-10T21:41:33Z",
+          "url": "https://github.com/tdrwenski/quandary/pull/9/commits/aa20a9de1ed0ba23da30274ae8f629f2ef44e872"
+        },
+        "date": 1745356247969,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "performance_tests/performance_test.py::test_eval[config_template_1]",
+            "value": 0.38468245391245404,
+            "unit": "iter/sec",
+            "range": "stddev: 0.02897306802521219",
+            "extra": "mean: 2.599546690599982 sec\nrounds: 10"
+          },
+          {
+            "name": "performance_tests/performance_test.py::test_eval[config_template_4]",
+            "value": 0.7271633877597792,
+            "unit": "iter/sec",
+            "range": "stddev: 0.016498569192166888",
+            "extra": "mean: 1.3752067511000063 sec\nrounds: 10"
           }
         ]
       }
