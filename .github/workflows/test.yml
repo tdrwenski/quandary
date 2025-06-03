@@ -23,6 +23,8 @@ jobs:
 
     - name: Set up Spack
       uses: spack/setup-spack@v2
+      with:
+        ref: rsc-2025-03-0
 
     - name: Configure Spack
       run: |
