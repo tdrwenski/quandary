@@ -77,7 +77,7 @@ jobs:
 
     - name: Build Quandary
       run: |
-        spack -e .spack_env -v install --use-buildcache package:never --show-log-on-error
+        spack --backtrace -dv -e .spack_env -v install --use-buildcache package:never --show-log-on-error
 
     - name: Run regression tests
       run: |
