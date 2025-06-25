@@ -26,6 +26,7 @@ jobs:
       with:
         repository: spack/spack
         path: spack
+        buildcache: false
 
     - name: Setup python
       uses: actions/setup-python@v5
@@ -60,24 +61,24 @@ jobs:
       run: |
         echo "SPACK_COLOR=always" >> "$GITHUB_ENV"
         echo "SPACK_DISABLE_LOCAL_CONFIG=1" >> "$GITHUB_ENV"
-        spack -e .spack_env mirror set binary_mirror --unsigned
-        spack mirror add --type binary --unsigned --oci-username GITHUB_USER --oci-password-variable GITHUB_TOKEN local-buildcache oci://ghcr.io/tdrwenski/spack-buildcache
+        spack -e .spack_env mirror rm binary_mirror
         spack compiler find
         cat C:\Users\runneradmin\.spack\packages.yaml
-        spack external find cmake ninja win-sdk win-wdk wgl msmpi diffutils python gmake py-pip
-        spack external find -p C:\ProgramData\chocolatey\lib\ diffutils gmake
+        spack external find cmake diffutils gmake ninja python wgl win-sdk win-wdk
+
+    - name: Spack bootstrap
+      run: |
         spack bootstrap now
 
     - name: Concretize Quandary
       run: |
         spack -e .spack_env rm quandary
-        spack -e .spack_env add quandary@develop+test^openblas
+        spack -e .spack_env add quandary@develop+test^openblas petsc~hdf5
         spack -e .spack_env concretize -f
-        spack -e .spack_env spec --long
 
     - name: Build Quandary
       run: |
-        spack --backtrace -dv -e .spack_env -v install --use-buildcache package:never --show-log-on-error
+        spack --backtrace -d -v --use-buildcache package:never --show-log-on-error -e .spack_env install
 
     - name: Run regression tests
       run: |
@@ -85,9 +86,9 @@ jobs:
         cp $(which quandary) .
         pytest -v -s tests
 
-    - name: Push packages and update index
-      env:
-        GITHUB_USER: ${{ github.actor }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: spack -e .spack_env buildcache push --update-index local-buildcache
-      if: ${{ !cancelled() }}
+    # - name: Push packages and update index
+    #   env:
+    #     GITHUB_USER: ${{ github.actor }}
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   run: spack -e .spack_env buildcache push --update-index local-buildcache
+    #   if: ${{ !cancelled() }}
