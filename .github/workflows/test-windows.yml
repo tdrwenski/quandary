@@ -70,21 +70,21 @@ jobs:
       run: |
         spack -d --backtrace bootstrap now
 
-    - name: Concretize Quandary
-      run: |
-        spack -e .spack_env rm quandary
-        spack -e .spack_env add quandary@develop+test^openblas petsc~hdf5
-        spack -d --backtrace -e .spack_env concretize -f
+    # - name: Concretize Quandary
+    #   run: |
+    #     spack -e .spack_env rm quandary
+    #     spack -e .spack_env add quandary@develop+test^openblas petsc~hdf5
+    #     spack -d --backtrace -e .spack_env concretize -f
 
     - name: Build Quandary
       run: |
-        spack --backtrace -d -v --use-buildcache package:never --show-log-on-error -e .spack_env install
+        spack --backtrace -d -v install quandary+test^openblas petsc~hdf5
 
-    - name: Run regression tests
-      run: |
-        spack env activate .spack_env
-        cp $(which quandary) .
-        pytest -v -s tests
+    # - name: Run regression tests
+    #   run: |
+    #     spack env activate .spack_env
+    #     cp $(which quandary) .
+    #     pytest -v -s tests
 
     # - name: Push packages and update index
     #   env:
