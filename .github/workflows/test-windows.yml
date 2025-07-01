@@ -68,13 +68,13 @@ jobs:
 
     - name: Spack bootstrap
       run: |
-        spack bootstrap now
+        spack -d --backtrace bootstrap now
 
     - name: Concretize Quandary
       run: |
         spack -e .spack_env rm quandary
         spack -e .spack_env add quandary@develop+test^openblas petsc~hdf5
-        spack -e .spack_env concretize -f
+        spack -d --backtrace -e .spack_env concretize -f
 
     - name: Build Quandary
       run: |
