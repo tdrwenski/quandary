@@ -57,7 +57,7 @@ jobs:
         del oneapi_installer.exe
       shell: cmd
 
-    # Note, need cmake >= 4.0.3, how to install that?
+    # Note, need cmake >= 4.1, currently still a rc, keep an eye out for that
     - name: Spack configuration
       run: |
         echo "SPACK_COLOR=always" >> "$GITHUB_ENV"
