@@ -39,12 +39,12 @@ jobs:
     - name: Install packages with choco
       run: choco install diffutils make -y
 
-    # - name: Cache OneAPI Fortran
-    #   id: cache-fortran
-    #   uses: actions/cache@v3
-    #   with:
-    #     path: C:\Program Files (x86)\Intel\oneAPI\compiler\
-    #     key: ${{ runner.os }}-fortran
+    - name: Cache OneAPI Fortran
+      id: cache-fortran
+      uses: actions/cache@v3
+      with:
+        path: C:\Program Files (x86)\Intel\oneAPI\
+        key: ${{ runner.os }}--oneapi-fortran
 
     - name: Install OneApi fortran compiler
       if: steps.cache-fortran.outputs.cache-hit != 'true'
