@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['datadir_0',['datadir',['../classOutput.html#aa35bfecd4c9d48d2a36d7de958e9bcc9',1,'Output']]],
+  ['decay_1',['DECAY',['../defs_8hpp.html#a5e46e0fe90abc6230f71928a43849bd2af34d9b416802d4cda3a4ee548619f206',1,'defs.hpp']]],
+  ['decay_5ftime_2',['decay_time',['../classOscillator.html#a7b117df6829da2cd619e776a6cd5cf55',1,'Oscillator']]],
+  ['defs_2ehpp_3',['defs.hpp',['../defs_8hpp.html',1,'']]],
+  ['dephase_4',['DEPHASE',['../defs_8hpp.html#a5e46e0fe90abc6230f71928a43849bd2a6df8d93940eeb1c56f01e4fd3a9b93c2',1,'defs.hpp']]],
+  ['dephase_5ftime_5',['dephase_time',['../classOscillator.html#a8f5b23b7b1c158f086e724fe7627135b',1,'Oscillator']]],
+  ['derivative_6',['derivative',['../classControlBasis.html#a1b50dc6c86c6c3d3061954491da05cea',1,'ControlBasis::derivative()'],['../classBSpline2nd.html#a4f43e62618771faa4ae3d77fddb61224',1,'BSpline2nd::derivative()'],['../classBSpline2ndAmplitude.html#a3616ef11be3874d380deba9ee48f3b24',1,'BSpline2ndAmplitude::derivative()'],['../classStep.html#acf35992f3f21ba1dadb0967e6bea165c',1,'Step::derivative()'],['../classBSpline0.html#a6daba2ef8670bd474b77861a60d7aacd',1,'BSpline0::derivative()']]],
+  ['detuning_5ffreq_7',['detuning_freq',['../classOscillator.html#ad4e43e2f5fd49b692bc916a9a93c0a08',1,'Oscillator']]],
+  ['diagonal_8',['DIAGONAL',['../defs_8hpp.html#a83753afdf4b4b0d70f2a478cfba82d35ad3fbf8a4dbb33b1e296fcaa32703b66d',1,'defs.hpp']]],
+  ['dim_9',['dim',['../structMatShellCtx.html#a99b166bb3aac8fa812438349afafcc8a',1,'MatShellCtx::dim'],['../classMasterEq.html#ad7615921804c8c1dfda8295c9b83f805',1,'MasterEq::dim'],['../classOptimTarget.html#ab1d22a530ba62865fb25f1a990e12455',1,'OptimTarget::dim']]],
+  ['dim_5fess_10',['dim_ess',['../classOptimTarget.html#a2065f6575b1e93f9a992271673ff7a6c',1,'OptimTarget::dim_ess'],['../classMasterEq.html#ae1e8bccc92eb5e68c476b8940f2a69bb',1,'MasterEq::dim_ess'],['../classGate.html#a7abd54c1002cd19f44e61021e7978183',1,'Gate::dim_ess']]],
+  ['dim_5fpostosc_11',['dim_postOsc',['../classOscillator.html#a57c296eced6d8ac99c431f627f486e41',1,'Oscillator']]],
+  ['dim_5fpreosc_12',['dim_preOsc',['../classOscillator.html#a7493e094d1e3eb2580ea9d10315b6076',1,'Oscillator']]],
+  ['dim_5frho_13',['dim_rho',['../classGate.html#a454d63c85821d33e9941ba8eccf47996',1,'Gate::dim_rho'],['../classHamiltonianFileReader.html#abe61d859330adb09f5c1a5976d6ca09b',1,'HamiltonianFileReader::dim_rho'],['../classMasterEq.html#a339bf57d2a07ca69cfc3bda69c5b2408',1,'MasterEq::dim_rho'],['../classOptimTarget.html#ad28c5ca2c232911d3808bf8a4612eb93',1,'OptimTarget::dim_rho']]],
+  ['dpdm_5fstates_14',['dpdm_states',['../classTimeStepper.html#a33769128e30e615ac6527991392554e1',1,'TimeStepper']]],
+  ['drhsdp_5fgetcoeffs_15',['dRHSdp_getcoeffs',['../mastereq_8hpp.html#a8f077a3b08eaffd2721784b5e8aded1c',1,'mastereq.hpp']]],
+  ['dt_16',['dt',['../classTimeStepper.html#ad261faaaa2066bfaa7ca7d9af834e61e',1,'TimeStepper']]],
+  ['dtknot_17',['dtknot',['../classBSpline2nd.html#a4521f6f50bc1001b7911d03c5130721d',1,'BSpline2nd::dtknot'],['../classBSpline2ndAmplitude.html#ac076d8f50877b4bd6e6e8ca4e5057500',1,'BSpline2ndAmplitude::dtknot'],['../classBSpline0.html#a98ae1e5b0046d603ca7951ecbab61583',1,'BSpline0::dtknot']]]
+];
