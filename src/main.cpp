@@ -23,6 +23,7 @@
 
 int main(int argc,char **argv)
 {
+  int unused_var;
   char filename[255];
   PetscErrorCode ierr;
 
