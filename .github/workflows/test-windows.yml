@@ -62,7 +62,6 @@ jobs:
       run: |
         echo "SPACK_COLOR=always" >> "$GITHUB_ENV"
         echo "SPACK_DISABLE_LOCAL_CONFIG=1" >> "$GITHUB_ENV"
-        spack -e .spack_env mirror rm binary_mirror
         spack compiler find
         cat C:\Users\runneradmin\.spack\packages.yaml
         spack external find cmake diffutils gmake ninja python wgl win-sdk win-wdk
