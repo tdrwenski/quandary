@@ -64,7 +64,7 @@ jobs:
         echo "SPACK_DISABLE_LOCAL_CONFIG=1" >> "$GITHUB_ENV"
         spack compiler find
         cat C:\Users\runneradmin\.spack\packages.yaml
-        spack external find cmake diffutils gmake ninja python wgl win-sdk win-wdk
+        spack external find diffutils gmake ninja python wgl win-sdk win-wdk
 
     - name: Spack bootstrap
       run: |
