@@ -39,6 +39,9 @@ jobs:
     - name: Install packages with choco
       run: choco install diffutils make -y
 
+    - name: Install Windows WDK
+      run: choco install windowsdriverkit10 -y
+
     - name: Cache OneAPI Fortran
       id: cache-fortran
       uses: actions/cache@v3
