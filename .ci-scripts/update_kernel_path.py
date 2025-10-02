@@ -12,7 +12,7 @@ with open(kernel_json_path, 'r') as f:
 if 'env' not in kernel_spec:
     kernel_spec['env'] = {}
 
-kernel_spec['env']['PATH'] = "/root/bin:" + os.environ.get('PATH', '')
+kernel_spec['env']['PATH'] = os.path.expanduser("~/bin") + ":" + os.environ.get('PATH', '')
 
 with open(kernel_json_path, 'w') as f:
     json.dump(kernel_spec, f, indent=2)

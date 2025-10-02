@@ -107,6 +107,7 @@ jobs:
           # Set up jupyter environment
           RUN pip install ipykernel jupyter_client && \
             python3 -m ipykernel install --user --name quandary-env --display-name 'Quandary' && \
+            bash /home/runner/work/quandary/quandary/mpi_wrapper.sh && \
             python3 /home/runner/work/quandary/quandary/update_kernel_path.py
 
           EOF
