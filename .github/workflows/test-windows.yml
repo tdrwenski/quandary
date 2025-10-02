@@ -73,7 +73,7 @@ jobs:
     - name: Concretize Quandary
       run: |
         spack -e .spack_env rm quandary
-        spack -e .spack_env add quandary@develop+test ^openblas ^petsc~hdf5
+        spack -e .spack_env add quandary@develop+test ^openblas ^petsc~hdf5 ^cmake@4.1.2
         spack -e .spack_env concretize -f
 
     - name: Build Quandary
